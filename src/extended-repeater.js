@@ -4,7 +4,7 @@ module.exports = function repeater(str, options) {
   let res='', add='';
 
   if(options.separator === undefined) options.separator='+';
-  if(options.additionSeparator===undefined) options.additionSeparator ='';
+  if(options.additionSeparator===undefined) options.additionSeparator ='|';
   if(options.addition===undefined) options.addition='';
 
   for(let i=0; i<options.additionRepeatTimes-1; i++){   //собираем add
