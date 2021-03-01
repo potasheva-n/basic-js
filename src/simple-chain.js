@@ -7,21 +7,26 @@ const chainMaker = {
     return this.chain.length;
   },
   addLink(value) {
-    return this.chain.push(value.toString());
+    this.chain.push(String(value));
+    return chainMaker;
   },
   removeLink(position) {
-    return this.chain.splice(position);
+    this.chain.splice(position-1,1)
+    return chainMaker;
   },
   reverseChain() {
-    return this.chain.reverse();
+    this.chain = this.chain.reverse();
+    return chainMaker;
   },
   finishChain() {
-    const chainString = this.chain.map(el => {
-      return el = '( ${el} )~~';
-    });
-
-    return chainString.join('');
+    let result='';
+    for(let i=0; i<this.chain.length-1; i++){
+      result=result+'( '+this.chain[i]+' )~~';
+    }
+    return result+'( '+this.chain[this.chain.length-1]+' )';
   }
 };
 
 module.exports = chainMaker;
+
+//console.log(chainMaker.addLink(function() {}).addLink('2nd').addLink('3rd').removeLink(2).reverseChain().finishChain());
