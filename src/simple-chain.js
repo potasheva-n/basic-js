@@ -11,6 +11,10 @@ const chainMaker = {
     return chainMaker;
   },
   removeLink(position) {
+    if(Number.isNaN(position) || position<=0 || !Number.isInteger(position)){
+      this.chain =[];
+      throw Error;
+    }
     this.chain.splice(position-1,1)
     return chainMaker;
   },
@@ -23,10 +27,12 @@ const chainMaker = {
     for(let i=0; i<this.chain.length-1; i++){
       result=result+'( '+this.chain[i]+' )~~';
     }
-    return result+'( '+this.chain[this.chain.length-1]+' )';
+    result = result+'( '+this.chain[this.chain.length-1]+' )';
+    this.chain=[];
+    return result;
   }
 };
 
 module.exports = chainMaker;
 
-//console.log(chainMaker.addLink(function() {}).addLink('2nd').addLink('3rd').removeLink(2).reverseChain().finishChain());
+console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain(), '( null )~~( GHI )~~( 333 )~~( 0 )~~( GHI )');
